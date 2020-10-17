@@ -38,8 +38,8 @@ class FetchedDatasetViewset(
             raise ParseError("Offset param must be integer")
 
         dataset = self.get_object()
-        data = list(dataset.get_contents(self.DATASET_PAGE_LIMIT, offset).dicts())
-        return Response(data, status=status.HTTP_200_OK)
+        data = dataset.get_contents(self.DATASET_PAGE_LIMIT, offset).dicts()
+        return Response(list(data), status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['get'])
     def groupby_count(self, request, pk, *args, **kwargs):
@@ -57,10 +57,11 @@ class FetchedDatasetViewset(
         if set(column_names).difference(set(base_contents.header())):
             raise ParseError("Unknown column name")
 
-        # aggregate won't work with generator output producing broken rows
-        data = list(
+        data = (
             base_contents
-                .cut(*column_names)
-                .rowreduce(key=column_names, reducer=lambda key, rows: [key, len(list(rows))])
+            .cut(*column_names)
+            .aggregate(key=column_names, aggregation=len)
+            .dicts()
         )
-        return Response(data, status=status.HTTP_200_OK)
+
+        return Response(list(data), status=status.HTTP_200_OK)

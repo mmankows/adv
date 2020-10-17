@@ -8,8 +8,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN yarn global add @vue/cli
 
-# COPY ["package.json", "yarn.lock", "/code/"]
-COPY ["package.json", "/code/"]
+COPY ["package.json", "yarn.lock", "/code/"]
 WORKDIR /code/
 
 # Separate cached layer

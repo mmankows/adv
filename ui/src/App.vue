@@ -1,58 +1,81 @@
 <template>
   <div id="app">
     <!-- Header-->
-    <Navbar/>
+    <Navbar @navChange="goToPage"/>
     <!-- Pages -->
-    <component :is="currentPage"/>
+    <div id="content">
+      <component
+          @navChange="goToPage"
+          :is="currentPageComponent"
+          v-bind="currentPage.props"
+      />
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+      Github:
+      <a
+          class="stretched-link"
+          href="https://github.com/mmankows/adv">https://github.com/mmankows/adv
+      </a>
+    </footer>
   </div>
 </template>
 
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  //color: #002200;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
 <script>
-import Navbar from "./components/Navbar";
-import AllDatasets from "./views/AllDatasets";
+import Navbar from "@/components/Navbar";
+import AllDatasets from "@/views/AllDatasets";
+import DatasetDetails from "@/views/DatasetDetails";
+import {PAGES} from "@/constants";
 
-const PAGE_ALL_DATASETS = 'PAGE_ALL_DATASETS';
-const PAGE_DATASET_CONTENTS ='PAGE_DATASET_CONTENTS';
-const PAGES = {
-  [PAGE_ALL_DATASETS]: AllDatasets,
-  [PAGE_DATASET_CONTENTS]: DatasetDetails,
+const PAGES_MAP = {
+  [PAGES.ALL_DATASETS]: AllDatasets,
+  [PAGES.DATASET_CONTENTS]: DatasetDetails,
 }
 
 export default {
-  components: {Navbar},
+  components: {
+    Navbar,
+    AllDatasets,
+    DatasetDetails,
+  },
   data() {
     return {
-      currentPage: PAGE_ALL_DATASETS,
+      currentPage: {
+          id: PAGES.ALL_DATASETS,
+          props: {}
+      },
     };
   },
   computed: {
-      computed: {
-        currentPage() {
-            return PAGES[this.currentPage]
-        }
-    },
+      currentPageComponent() {
+          return PAGES_MAP[this.currentPage.id]
+      }
+  },
+  methods: {
+    goToPage(id, props = {}) {
+        this.currentPage = {id, props};
+    }
   }
 }
 </script>
+
+
+<style scoped>
+  #content {
+    padding-top: 4em;
+  }
+  #footer {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    background: black;
+    color: gainsboro;
+  }
+</style>

@@ -7,6 +7,8 @@ SECRET_KEY = env.str('DJ_SECRET_KEY')
 
 DEBUG = env.bool('DJ_DEBUG', default=False)
 
+APPEND_SLASH = True
+
 INSTALLED_APPS = [
     # Django goodies
     'django.contrib.auth',
@@ -21,6 +23,7 @@ INSTALLED_APPS = [
 # TODO: Add authentication and common security stuff
 #  - middlewares (CORS, XRSF etc)
 #  - related settings
+ALLOWED_HOSTS = ['*']
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]

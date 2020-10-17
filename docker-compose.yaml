@@ -38,6 +38,7 @@ services:
     depends_on:
       - postgres
       - swapi
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
   ui:
     image: adv-ui
@@ -49,8 +50,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./webapp:/code:delegated
-      - node_modules:/code/node_modules
+      - ./ui:/code:delegated
     depends_on:
       - backend
     command: >
@@ -62,4 +62,3 @@ volumes:
   db_data:
   python_lib:
   datasets:
-  node_modules:

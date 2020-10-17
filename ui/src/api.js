@@ -19,13 +19,13 @@ class Resource {
         this.path = resourcePath;
     }
 
+    /** Generic error handler. */
     async _handler(promise) {
-        // Add generic 404, 500, 400 errors handling
         try {
             const resp = await promise;
             return resp.data;
         } catch (e) {
-            window.console.log("EXC", e);
+            window.console.trace("EXC", e);
             const detail = (e.response.data || {}).detail || '';
             const respCode = e.response.status;
 
@@ -61,13 +61,13 @@ class Resource {
 
 class DatasetResource extends Resource {
     fetchNew() {
-        return this.post(`/${this.path}/`);
+        return this.post(`/${this.path}/fetch/`);
     }
-    contents({id}) {
-        return this.get(`/${this.path}/${id}/contents/`);
+    contents({id, offset}) {
+        return this.get(`/${this.path}/${id}/contents/`, {offset});
     }
-    groupByCount({id}, [...columnNames]) {
-        return this.get(`/${this.path/${id}/groupby_count/}`, {cols: columnNames.join(',')})
+    groupByCount({id, columnNames}) {
+        return this.get(`/${this.path}/${id}/groupby_count/`, {cols: columnNames.join(',')})
     }
 }
 

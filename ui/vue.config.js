@@ -4,7 +4,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/": {
-        target: "http://adv:8000",
+        target: "http://backend:8000",
       },
     },
   },
