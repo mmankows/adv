@@ -73,3 +73,5 @@ REST_FRAMEWORK = {
 }
 
 SWAPI_BASE_URL = env.str('SWAPI_BASE_URL')
+
+DATASETS_DIR = '/datasets'

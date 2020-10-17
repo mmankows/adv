@@ -18,6 +18,9 @@ RUN pip install -r /code/requirements.txt
 COPY . code
 WORKDIR code
 
+# TODO: delegate files storing somewhere
+RUN mkdir /datasets
+
 EXPOSE 8000
 
 # TODO: run through uwsgi server, get rid of manage.py

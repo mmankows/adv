@@ -51,11 +51,11 @@ class TestSwapiCli(TestCase):
     }
 
     @mock.patch('adv_datasets.swapi_cli.SwapiCli._get')
-    def test_get_all_people__two_pages(self, mock_get):
+    def test_get_all_characters__two_pages(self, mock_get):
         page1 = self.PEOPLE_RESP
         page2 = self.PEOPLE_RESP.copy()
         page2['next'] = None
         mock_get.side_effect = [page1, page2]
         c = SwapiCli()
-        all_results = list(c.get_all_people())
+        all_results = list(c.get_all_characters())
         self.assertEqual(len(all_results), 4)

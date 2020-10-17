@@ -6,3 +6,4 @@ from adv_datasets.models import FetchedDataset
 class FetchedDatasetSerializer(serializers.ModelSerializer):
     class Meta:
         model = FetchedDataset
+        fields = serializers.ALL_FIELDS

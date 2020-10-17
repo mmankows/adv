@@ -27,9 +27,12 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
+      # for code hot-reloading
       - .:/code:delegated
       # keep requirements between startups
       - python_lib:/usr/local/lib/python3.7
+      # keep datasets
+      - datasets:/datasets
     ports:
       - 8000:8000
     depends_on:
@@ -40,3 +43,4 @@ services:
 volumes:
   db_data:
   python_lib:
+  datasets:
