@@ -33,7 +33,7 @@ class FetchedDatasetViewset(
         # TODO - improve get params parsing
         try:
             offset = int(request.GET.get(self.PARAM_OFFSET, 0))
-            assert offset > 0
+            assert offset >= 0
         except:
             raise ParseError("Offset param must be integer")
 

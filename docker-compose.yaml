@@ -19,7 +19,7 @@ services:
       # keep db data between startups
       - db_data:/var/lib/postgresql/data
 
-  adv:
+  backend:
     env_file:
       - env.local
     image: adv-backend
@@ -39,8 +39,27 @@ services:
       - postgres
       - swapi
 
+  ui:
+    image: adv-ui
+    environment:
+      - BACKEND_URL=http://localhost:8000
+    build:
+      context: ui
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./webapp:/code:delegated
+      - node_modules:/code/node_modules
+    depends_on:
+      - backend
+    command: >
+      yarn serve
+
+
 # Persisted or shared between runs
 volumes:
   db_data:
   python_lib:
   datasets:
+  node_modules:
