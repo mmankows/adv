@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  swapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.swapi
+    # TODO: remove - debug only
+    ports:
+      - 8001:8000
+
+  postgres:
+    image: postgres:12.2
+    environment:
+      - POSTGRES_DB=main
+      - POSTGRES_USER=db-user
+      - POSTGRES_PASSWORD=db-pass
+    volumes:
+      # keep db data between startups
+      - db_data:/var/lib/postgresql/data
+
+  adv:
+    env_file:
+      - env.local
+    image: adv-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code:delegated
+      # keep requirements between startups
+      - python_lib:/usr/local/lib/python3.7
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+      - swapi
+
+# Persisted or shared between runs
+volumes:
+  db_data:
+  python_lib:

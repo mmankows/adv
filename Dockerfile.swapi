@@ -1,0 +1,23 @@
+# Containerize SWAPI
+# it's no longer maintained nor deployed anywhere
+FROM python:2.7
+
+RUN apt-get update && apt-get install -y unzip make gcc postgresql libmemcached-dev
+
+# Pull SWAPI repo code
+ADD https://github.com/phalt/swapi/archive/master.zip .
+
+RUN unzip master.zip -d /code/ && rm master.zip
+
+WORKDIR /code/swapi-master
+
+# SWAPI requirements are broken
+RUN sed "s/psycopg2==2.5.4/psycopg2==2.7.5/" requirements.txt > req.fixed && pip install -r req.fixed
+
+# Make all data available in sql lite already
+RUN make build && make load_data
+
+EXPOSE 8000
+
+ENTRYPOINT ["python"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]

@@ -1,0 +1,7 @@
+# TODO: use poetry
+Django==2.2.10
+django-environ==0.4.5
+djangorestframework==3.11.0
+petl==1.6.8
+psycopg2==2.8.6
+requests==2.24.0
