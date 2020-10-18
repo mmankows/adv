@@ -4,8 +4,9 @@
       <button
           type="button"
           class="btn btn-link"
-          @click="$emit('navChange', PAGES.ALL_DATASETS)"
-      >Datasets</button>
+          @click="$emit('navChange', PAGES.ALL_DATASETS)">
+        Datasets
+      </button>
     </div>
 </template>
 

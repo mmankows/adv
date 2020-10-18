@@ -1,16 +1,17 @@
 import logging
-from typing import Generator, Optional
+from typing import Generator
 from urllib.parse import urljoin
 
 import requests
 from django.conf import settings
 
-
 logger = logging.getLogger()
 
 
 class SwapiCli:
-    """Wrapper for interacting with Star Wars API."""
+    """
+    Wrapper for interacting with Star Wars API.
+    """
     RESOURCE_PEOPLE = 'api/people'
     RESOURCE_PLANETS = 'api/planets'
 
@@ -28,7 +29,7 @@ class SwapiCli:
         return self._get_all(self.RESOURCE_PLANETS)
 
     def _get(self, path: str, **params: dict) -> dict:
-        """Generic requests, returns json"""
+        """Generic GET, returns parsed json data"""
         try:
             resp = requests.get(
                 url=urljoin(self.base_url, path),
@@ -42,12 +43,13 @@ class SwapiCli:
             raise self.SomethingWentWrong
 
     def _get_all(self, resource_path: str) -> Generator:
-        """Fetch all entities by iterating throug paginated API response."""
+        """Fetch all entities by iterating through paginated API response."""
         page_num = 0
         while True:
             params = {'page': page_num} if page_num else {}
             resp_data = self._get(resource_path, **params)
             results = resp_data['results']
+
             for res in results:
                 yield res
 

@@ -56,6 +56,8 @@ class TestSwapiCli(TestCase):
         page2 = self.PEOPLE_RESP.copy()
         page2['next'] = None
         mock_get.side_effect = [page1, page2]
+
         c = SwapiCli()
         all_results = list(c.get_all_characters())
+
         self.assertEqual(len(all_results), 4)

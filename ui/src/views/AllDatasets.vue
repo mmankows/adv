@@ -8,6 +8,7 @@
         <SimpleTable
           :header="HEADER"
           :rows="datasets"
+          :rowsClickable="true"
           @rowClicked="data => $emit('navChange', PAGES.DATASET_CONTENTS, data)"
       />
     </div>

@@ -2,7 +2,6 @@ import environ
 
 env = environ.Env()
 
-
 SECRET_KEY = env.str('DJ_SECRET_KEY')
 
 DEBUG = env.bool('DJ_DEBUG', default=False)
@@ -47,10 +46,6 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

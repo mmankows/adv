@@ -38,7 +38,9 @@ services:
     depends_on:
       - postgres
       - swapi
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >-
+      bash -c "python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
 
   ui:
     image: adv-ui
@@ -53,8 +55,7 @@ services:
       - ./ui:/code:delegated
     depends_on:
       - backend
-    command: >
-      yarn serve
+    command: yarn serve
 
 
 # Persisted or shared between runs

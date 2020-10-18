@@ -11,8 +11,7 @@
             type="button"
             class="btn btn-info mx-2"
             :disabled="!canLoadGroupBy"
-            @click="loadGroupBy"
-        >
+            @click="loadGroupBy">
           Load
         </button>
         <button type="button" class="btn btn-danger mx-2" @click="cancelGroupBy">

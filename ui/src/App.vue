@@ -7,8 +7,7 @@
       <component
           @navChange="goToPage"
           :is="currentPageComponent"
-          v-bind="currentPage.props"
-      />
+          v-bind="currentPage.props"/>
     </div>
     <!-- Footer -->
     <footer id="footer">
