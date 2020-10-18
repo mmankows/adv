@@ -16,6 +16,7 @@ In order to run this app you'd need `docker` installed.
 
 ## TODOs
 There's bunch of TODOs in different places in the code for things that could/should be improved.
+I consider them OOS or too time consuming for sake of such task.
 
 Additional points left:
 - Currently statics are served by webpack dev server - 
