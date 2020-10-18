@@ -21,8 +21,10 @@ class FetchedDataset(models.Model):
 
     def get_grouped_count(self, column_names: List[str], limit: int, offset: int = 0) -> "RowSliceView":
         """Get count of results grouped by column names."""
+        # Petl API is little clunky
+        aggregate_key = column_names if len(column_names) > 1 else column_names[0]
         return (
             self.get_contents(limit, offset)
                 .cut(*column_names)
-                .aggregate(key=column_names, aggregation=len)
+                .aggregate(key=aggregate_key, aggregation=len)
         )
