@@ -2,9 +2,11 @@
 
 ## Setup & Usage
 In order to run this app you'd need `docker` installed.
-- Pull the repo
-- Run `docker-compose up`
-- Open http://localhost:8080 in your browser
+
+Run
+```
+cd /tmp/ && git clone git@github.com:mmankows/adv.git && cd adv && docker-compose up
+```
 
 ## TODOs
 There's bunch of TODOs in different places in the code for things that could/should be improved.
