@@ -25,4 +25,5 @@ either from dedicated server or using Django addon `whitenoise`.
 - Deploy it live
 
 ## Additional comments
-SWAPI is no longer deployed nor maintained and required additonal effort to dockerize it.
+- SWAPI is no longer deployed nor maintained and required additonal effort to dockerize it.
+- https://github.com/phalt/swapi-python was NOT used 
