@@ -35,7 +35,7 @@ class SwapiCli:
                 url=urljoin(self.base_url, path),
                 params=params
             )
-            print(resp.content)
+            logger.debug(resp.content)
             return resp.json()
         except:
             # TODO: Better error logging
@@ -44,9 +44,9 @@ class SwapiCli:
 
     def _get_all(self, resource_path: str) -> Generator:
         """Fetch all entities by iterating through paginated API response."""
-        page_num = 0
+        page_num = 1
         while True:
-            params = {'page': page_num} if page_num else {}
+            params = {'page': page_num} if page_num > 1 else {}
             resp_data = self._get(resource_path, **params)
             results = resp_data['results']
 

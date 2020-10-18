@@ -43,7 +43,7 @@ class FetchedDatasetViewset(
 
     @action(detail=True, methods=['get'])
     def groupby_count(self, request, pk, *args, **kwargs):
-        """Returns count for rows groupped by sumset of columns."""
+        """Returns count for rows grouped by sumset of columns."""
         # TODO - improve get params parsing and validation
         try:
             column_names = request.GET[self.PARAM_COLOMUNS]

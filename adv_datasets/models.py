@@ -1,4 +1,4 @@
-from typing import List, Generator, TYPE_CHECKING
+from typing import List, TYPE_CHECKING
 
 import petl
 

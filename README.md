@@ -1,5 +1,13 @@
 # Adverity task
 
+## Components
+All components are spinned out as described in `docker-compose.yaml`
+- vue.js frontend under `ui` dir, currently served by webpack dev server
+- Main Django backend under `adv` and `adv_datasets`
+- Postgresql db for Django backend
+- SWAPI - dockerized swapi repo app, see `Dockerfile.swapi`
+
+
 ## Setup & Usage
 In order to run this app you'd need `docker` installed.
 

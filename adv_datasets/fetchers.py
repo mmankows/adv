@@ -1,10 +1,8 @@
 import os
+import csv
 from uuid import uuid4
 
 from django.conf import settings
-
-import csv
-
 from django.utils.functional import cached_property
 
 from adv_datasets.models import FetchedDataset
